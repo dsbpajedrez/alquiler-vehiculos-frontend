@@ -10,9 +10,9 @@ export const registerOperation = async (operation) => {
     }
 }
 
-export const cancelRent = async (operationId) => {
+export const cancelRent = async (carId) => {
     try {
-        const response = await api.post(`/operations/cancel/${operationId}`)
+        const response = await api.post(`/operations/cancel/${carId}`)
         return response.data
     } catch (error) {
         console.error("Error canceling rental:", error)
