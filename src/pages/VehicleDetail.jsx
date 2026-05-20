@@ -10,6 +10,7 @@ import {
 import {
   getVehicleById
 } from "../services/vehicle.service";
+import { cancelRent, registerOperation } from "../services/operations.service";
 
 export default function VehicleDetail() {
 
@@ -20,6 +21,11 @@ export default function VehicleDetail() {
   const [loading, setLoading] = useState(true);
 
   const [error, setError] = useState(null);
+
+  const [rentLoading, setRentLoading] = useState(false);
+  const [cancelLoading, setCancelLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
 
   useEffect(() => {
 
@@ -37,6 +43,7 @@ export default function VehicleDetail() {
 
       setVehicle(data.data);
 
+
     } catch (err) {
 
       console.error(err);
@@ -49,6 +56,44 @@ export default function VehicleDetail() {
 
     }
   };
+
+  const handleRent = async () => {
+    
+    setRentLoading(true);
+    try {
+      const vehicleToRegister = {
+        carId: vehicle.id,
+        userId: 1,
+        rentalDate: new Date(),
+        returnDate: new Date(),
+        isActive: true
+      }
+      await registerOperation(vehicleToRegister);
+      setSuccessMessage("Vehículo alquilado exitosamente");
+      loadVehicle();
+    } catch (error) {
+      console.error("Error registering operation:", error);
+    } finally {
+      setRentLoading(false);
+      setSuccessMessage("");
+    }
+  };
+
+    const handelCancelRent = async () => {
+      setCancelLoading(true);
+      try {
+        await cancelRent(vehicle.id);
+        setSuccessMessage("Alquiler cancelado exitosamente");
+        loadVehicle();
+      }
+      catch (error) {
+        console.error("Error canceling rental:", error);
+      }
+      finally {
+        setCancelLoading(false);
+        setSuccessMessage("");
+      }
+    }
 
   if (loading) {
     return (
@@ -132,10 +177,27 @@ export default function VehicleDetail() {
         </p>
 
       </div>
+      <div className="flex justify-around">
+        {
+          successMessage && (
 
+            <div
+              className="
+                mt-6
+                bg-green-100
+                text-green-700
+                p-4
+                rounded-lg
+              "
+            >
+              {successMessage}
+            </div>
+
+          )
+        }
       <button
         disabled={!vehicle.available}
-
+        onClick={()=>handleRent()}
         className={`
           mt-8
           px-6
@@ -152,9 +214,38 @@ export default function VehicleDetail() {
         `}
       >
 
-        Alquilar vehículo
+        {
+          rentLoading
+            ? "Procesando..."
+            : "Alquilar vehículo"
+        }
 
       </button>
+
+      <button 
+      className={`
+          mt-8
+          px-6
+          py-3
+          rounded-lg
+          text-white
+          font-bold
+
+          ${
+            vehicle.available
+              ?  "bg-gray-400"
+              : "bg-blue-600 hover:bg-blue-700"
+          }
+        `}
+      disabled={vehicle.available}
+      onClick={() => handelCancelRent()}
+      >
+        {
+          cancelLoading ? "Procesando..." : "Cancelar alquiler"
+        }
+      </button>
+
+      </div>
 
     </div>
   );
