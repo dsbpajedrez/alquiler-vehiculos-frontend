@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getVehicles } from "../services/Vehicle.service";
+import VehicleCard from "../components/vehicles/VehicleCard";
 
 export default function Vehicle() {
     const [vehicles, setVehicles] = useState([]);
@@ -35,52 +36,7 @@ export default function Vehicle() {
             </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                {vehicles.map((vehicle) => (
-
-          <div
-            key={vehicle.id}
-
-            className="
-              bg-white
-              rounded-xl
-              shadow-md
-              p-5
-            "
-          >
-
-            <h2
-              className="
-                text-xl
-                font-bold
-              "
-            >
-              {vehicle.brand}
-            </h2>
-            <p>Placa: {vehicle.licensePlate}</p>
-            <p>
-              Modelo:
-              {" "}
-              {vehicle.model}
-            </p>
-
-            <p>
-              Año:
-              {" "}
-              {vehicle.year}
-            </p>
-
-            <p>
-              Estado:
-              {" "}
-
-              {vehicle.available
-                ? "Disponible"
-                : "No disponible"}
-            </p>
-
-          </div>
-
-        ))}
+                {vehicles.map((vehicle) => <VehicleCard key={vehicle.id} vehicle={vehicle} />)}
 
             </div>
         </div>
