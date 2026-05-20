@@ -1,13 +1,14 @@
 import Navbar from "../components/Navbar"
 import Sidebar from "../components/Sidebar"
+import "./MainLayout.css"
 
 export default function MainLayout({ children }) {
     return(
-        <div className="flex bg-gray-100 min-h-screen">
+        <div className="main-layout">
             <Sidebar />
-            <div className="flex flex-1 flex-col">
+            <div className="main-layout__content">
                 <Navbar />
-                <main className="flex-1 p-6">
+                <main className="main-layout__main">
                     {children}
                 </main>
             </div>

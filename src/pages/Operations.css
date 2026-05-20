@@ -1,0 +1,59 @@
+.operations-page__title {
+  margin-bottom: 1.5rem;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+}
+
+.operations-page__table-wrapper {
+  overflow-x: auto;
+  border-radius: 0.75rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.operations-page__table {
+  min-width: 100%;
+  table-layout: auto;
+}
+
+.operations-page__head-row {
+  background-color: #e5e7eb;
+  text-align: left;
+}
+
+.operations-page__head-cell {
+  border-bottom-width: 1px;
+  padding: 0.5rem 1rem;
+}
+
+.operations-page__row {
+  border-bottom-width: 1px;
+}
+
+.operations-page__cell {
+  padding: 0.5rem 1rem;
+}
+
+.operations-page__status-cell {
+  padding: 1rem;
+}
+
+.operations-page__status--active {
+  color: #16a34a;
+}
+
+.operations-page__status--inactive {
+  color: #dc2626;
+}
+
+.operations-page__cancel-button {
+  border-radius: 0.25rem;
+  background-color: #ef4444;
+  padding: 0.25rem 0.75rem;
+  color: #ffffff;
+}
+
+.operations-page__cancel-button:hover {
+  background-color: #b91c1c;
+}

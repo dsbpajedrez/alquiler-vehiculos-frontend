@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom";
+import "./Navbar.css";
 
 export default function Navbar() {
     return (
-    <header className="bg-white shadow-sm px-8 py-4 flex justify-between items-center">
-      <h2 className="text-2xl font-semibold">
+    <header className="navbar">
+      <h2 className="navbar__title">
         Sistema de Alquiler de Vehículos
       </h2>
       <div>
-        <span className="text-gray-500">
+        <span className="navbar__welcome">
           Bienvenido
         </span>
       </div>

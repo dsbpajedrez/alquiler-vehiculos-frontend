@@ -1,4 +1,5 @@
 import {
+  useCallback,
   useEffect,
   useState,
 } from "react";
@@ -11,6 +12,7 @@ import {
   getVehicleById
 } from "../services/vehicle.service";
 import { cancelRent, registerOperation } from "../services/operations.service";
+import "./VehicleDetail.css";
 
 export default function VehicleDetail() {
 
@@ -27,13 +29,7 @@ export default function VehicleDetail() {
   const [successMessage, setSuccessMessage] = useState("");
 
 
-  useEffect(() => {
-
-    loadVehicle();
-
-  }, [id]);
-
-  const loadVehicle = async () => {
+  const loadVehicle = useCallback(async () => {
 
     try {
 
@@ -55,7 +51,13 @@ export default function VehicleDetail() {
       setLoading(false);
 
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+
+    loadVehicle();
+
+  }, [loadVehicle]);
 
   const handleRent = async () => {
     
@@ -113,29 +115,19 @@ export default function VehicleDetail() {
 
   return (
     <div
-      className="
-        bg-white
-        rounded-xl
-        shadow-md
-        p-8
-        max-w-2xl
-      "
+      className="vehicle-detail"
     >
 
       <h1
-        className="
-          text-4xl
-          font-bold
-          mb-6
-        "
+        className="vehicle-detail__title"
       >
         {vehicle.brand}
       </h1>
 
-      <div className="space-y-4">
+      <div className="vehicle-detail__info">
 
         <p>
-          <span className="font-bold">
+          <span className="vehicle-detail__label">
             Modelo:
           </span>
 
@@ -145,7 +137,7 @@ export default function VehicleDetail() {
         </p>
 
         <p>
-          <span className="font-bold">
+          <span className="vehicle-detail__label">
             Año:
           </span>
 
@@ -155,7 +147,7 @@ export default function VehicleDetail() {
         </p>
 
         <p>
-          <span className="font-bold">
+          <span className="vehicle-detail__label">
             Estado:
           </span>
 
@@ -164,8 +156,8 @@ export default function VehicleDetail() {
           <span
             className={
               vehicle.available
-                ? "text-green-600"
-                : "text-red-600"
+                ? "vehicle-detail__status vehicle-detail__status--available"
+                : "vehicle-detail__status vehicle-detail__status--unavailable"
             }
           >
 
@@ -177,18 +169,12 @@ export default function VehicleDetail() {
         </p>
 
       </div>
-      <div className="flex justify-around">
+      <div className="vehicle-detail__actions">
         {
           successMessage && (
 
             <div
-              className="
-                mt-6
-                bg-green-100
-                text-green-700
-                p-4
-                rounded-lg
-              "
+              className="vehicle-detail__message"
             >
               {successMessage}
             </div>
@@ -198,20 +184,11 @@ export default function VehicleDetail() {
       <button
         disabled={!vehicle.available}
         onClick={()=>handleRent()}
-        className={`
-          mt-8
-          px-6
-          py-3
-          rounded-lg
-          text-white
-          font-bold
-
-          ${
+        className={`vehicle-detail__button ${
             vehicle.available
-              ? "bg-blue-600 hover:bg-blue-700"
-              : "bg-gray-400"
-          }
-        `}
+              ? "vehicle-detail__button--primary"
+              : "vehicle-detail__button--disabled"
+          }`}
       >
 
         {
@@ -223,20 +200,11 @@ export default function VehicleDetail() {
       </button>
 
       <button 
-      className={`
-          mt-8
-          px-6
-          py-3
-          rounded-lg
-          text-white
-          font-bold
-
-          ${
-            vehicle.available
-              ?  "bg-gray-400"
-              : "bg-blue-600 hover:bg-blue-700"
-          }
-        `}
+      className={`vehicle-detail__button ${
+          vehicle.available
+            ?  "vehicle-detail__button--disabled"
+            : "vehicle-detail__button--primary"
+        }`}
       disabled={vehicle.available}
       onClick={() => handelCancelRent()}
       >

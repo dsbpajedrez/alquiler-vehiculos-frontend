@@ -1,17 +1,14 @@
-import { useEffect, useState } from "react";
-import { getVehicles } from "../services/Vehicle.service";
+import { useCallback, useEffect, useState } from "react";
+import { getVehicles } from "../services/vehicle.service";
 import VehicleCard from "../components/vehicles/VehicleCard";
+import "./Vehicle.css";
 
 export default function Vehicle() {
     const [vehicles, setVehicles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        loadVehicles();
-    }, []);
-
-    const loadVehicles = async () => {
+    const loadVehicles = useCallback(async () => {
         try {
             const response = await getVehicles()
             setVehicles(response.data);
@@ -21,7 +18,11 @@ export default function Vehicle() {
         } finally {
             setLoading(false);
         }
-    }
+    }, []);
+
+    useEffect(() => {
+        loadVehicles();
+    }, [loadVehicles]);
 
     if (loading) {
         return <p>Loading...</p>
@@ -30,11 +31,11 @@ export default function Vehicle() {
         return <p>{error}</p>
     }
     return (
-        <div>
-            <h1 className="text-2xl font-bold">
-                Listado de vehículos 
+        <div className="vehicle-page">
+            <h1 className="vehicle-page__title">
+                Listado de vehículos
             </h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="vehicle-page__grid">
 
                 {vehicles.map((vehicle) => <VehicleCard key={vehicle.id} vehicle={vehicle} />)}
 

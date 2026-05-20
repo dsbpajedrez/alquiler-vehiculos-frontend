@@ -1,17 +1,13 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { cancelRent, getOperations } from "../services/operations.service";
+import "./Operations.css";
 
 export default function Operations() {
     const [operations, setOperations] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [successMessage, setSuccessMessage] = useState("");
 
-    useEffect(() => {
-        loadOperations()
-    }, [])
-
-    const loadOperations = async () => {
+    const loadOperations = useCallback(async () => {
         try {
             setLoading(true);
             const data = await getOperations();
@@ -22,12 +18,15 @@ export default function Operations() {
         } finally {
             setLoading(false);
         }
-    }
+    }, []);
+
+    useEffect(() => {
+        loadOperations()
+    }, [loadOperations])
 
     const handleCancel = async (operationId) => {
         try {
             await cancelRent(operationId);
-            setSuccessMessage("Rental canceled successfully");
             loadOperations();
         } catch (err) {
             console.error(err);
@@ -43,29 +42,29 @@ export default function Operations() {
     }
 
     return (
-        <div>
-            <h1 className="text-3xl font-bold mb-6">Operations</h1>
-            <div className="overflow-x-auto bg-white rounded-xl shadow-md">
-                <table className="min-w-full table-auto">
+        <div className="operations-page">
+            <h1 className="operations-page__title">Operations</h1>
+            <div className="operations-page__table-wrapper">
+                <table className="operations-page__table">
                     <thead>
-                        <tr className="bg-gray-200 text-left">
-                            <th className="py-2 px-4 border-b">Operacion ID</th>
-                            <th className="py-2 px-4 border-b">Usuario ID</th>
-                            <th className="py-2 px-4 border-b">Vehículo</th>
-                            <th className="py-2 px-4 border-b">Status</th>
-                            <th className="py-2 px-4 border-b">Fecha renta</th>
-                            <th className="py-2 px-4 border-b">Fecha entrega</th>
-                            <th className="py-2 px-4 border-b">Acciones</th>
+                        <tr className="operations-page__head-row">
+                            <th className="operations-page__head-cell">Operacion ID</th>
+                            <th className="operations-page__head-cell">Usuario ID</th>
+                            <th className="operations-page__head-cell">Vehículo</th>
+                            <th className="operations-page__head-cell">Status</th>
+                            <th className="operations-page__head-cell">Fecha renta</th>
+                            <th className="operations-page__head-cell">Fecha entrega</th>
+                            <th className="operations-page__head-cell">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         {operations.map((operation) => (
-                            <tr key={operation.id} className="border-b">
-                                <td className="py-2 px-4">{operation.id}</td>
-                                <td className="py-2 px-4">{operation.userId}</td>
-                                <td className="py-2 px-4">{operation.carId}</td>
-                                <td className="p-4">
-                                 <span   className={operation.isActive ? "text-green-600" : "text-red-600"}>
+                            <tr key={operation.id} className="operations-page__row">
+                                <td className="operations-page__cell">{operation.id}</td>
+                                <td className="operations-page__cell">{operation.userId}</td>
+                                <td className="operations-page__cell">{operation.carId}</td>
+                                <td className="operations-page__status-cell">
+                                 <span   className={operation.isActive ? "operations-page__status operations-page__status--active" : "operations-page__status operations-page__status--inactive"}>
                                         {
                                         operation.isActive
                                             ? "Activa"
@@ -74,13 +73,13 @@ export default function Operations() {
                                 </span>
 
                                 </td>
-                                <td className="py-2 px-4">{operation.rentalDate}</td>
-                                <td className="py-2 px-4">{operation.returnDate}</td>
-                                <td className="py-2 px-4">
+                                <td className="operations-page__cell">{operation.rentalDate}</td>
+                                <td className="operations-page__cell">{operation.returnDate}</td>
+                                <td className="operations-page__cell">
                                     {operation.isActive && (
                                         <button
                                             onClick={() => handleCancel(operation.carId)}
-                                            className="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded"
+                                            className="operations-page__cancel-button"
                                         >
                                             Cancel
                                         </button>

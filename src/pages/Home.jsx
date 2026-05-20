@@ -1,7 +1,9 @@
+import "./Home.css";
+
 export default function Home() {
     return (
-        <div>
-            <h1 className="text-3xl font-bold">
+        <div className="home-page">
+            <h1 className="home-page__title">
                 Home
             </h1>
         </div>
