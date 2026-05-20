@@ -1,48 +1,31 @@
-import { Link } from "react-router-dom";
+import {
+  NavLink,
+} from "react-router-dom";
 
 export default function Sidebar() {
+
   return (
+
     <aside
-      className="
-        w-64
-        bg-white
-        shadow-md
-        min-h-screen
-        p-4
-      "
-    >
-      <nav>
-        <ul className="space-y-4">
+      className="w-64 bg-gray-900 text-white min-h-screen p-6">
 
-          <li>
-            <Link
-              to="/"
-              className="hover:text-blue-600"
-            >
-              Inicio
-            </Link>
-          </li>
+      <h1
+        className="text-2xl font-bold mb-10">
+        Alquiler de Vehículos
+      </h1>
 
-          <li>
-            <Link
-              to="/vehicles"
-              className="hover:text-blue-600"
-            >
-              Vehículos
-            </Link>
-          </li>
+      <nav className="flex flex-col gap-4" >
 
-          <li>
-            <Link
-              to="/operations"
-              className="hover:text-blue-600"
-            >
-              Operaciones
-            </Link>
-          </li>
+        <NavLink to="/vehicles" className=" hover:text-blue-400">
+          Vehículos
+        </NavLink>
 
-        </ul>
+        <NavLink to="/operations" className="hover:text-blue-400">
+          Operaciones
+        </NavLink>
+
       </nav>
+
     </aside>
   );
 }
