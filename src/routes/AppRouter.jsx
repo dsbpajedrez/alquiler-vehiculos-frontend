@@ -5,6 +5,7 @@ import Admin from "../pages/admin/Admin";
 import VehicleDetail from "../pages/vehicleDetail/VehicleDetail";
 import Operations from "../pages/operations/Operations";
 import MainLayout from "../layouts/MainLayout";
+import CreateVehicle from "../pages/vehicles/vehicle-create/VehicleCreate";
 
 export default function AppRoter() {
     return (
@@ -16,6 +17,7 @@ export default function AppRoter() {
                     <Route path="/vehicles/:id" element={<VehicleDetail />} />
                     <Route path="/operations" element={<Operations />} />
                     <Route path="/admin" element={<Admin />} />
+                    <Route path="/admin/vehicles/create" element={<CreateVehicle />} />
                 </Routes>
             </MainLayout>
         </BrowserRouter>

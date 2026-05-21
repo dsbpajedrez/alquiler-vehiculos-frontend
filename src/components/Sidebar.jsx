@@ -24,6 +24,9 @@ export default function Sidebar() {
         <NavLink to="/operations" className="sidebar__link">
           Operaciones
         </NavLink>
+        <NavLink to="/admin" className="sidebar__link">
+          Admin
+        </NavLink>
 
       </nav>
 

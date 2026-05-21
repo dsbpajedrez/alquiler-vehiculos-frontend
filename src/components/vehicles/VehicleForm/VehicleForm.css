@@ -1,0 +1,112 @@
+.vehicle-form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.vehicle-form__group {
+  margin-bottom: 1.5rem;
+}
+
+.vehicle-form__group:last-of-type {
+  margin-bottom: 2rem;
+}
+
+.vehicle-form__label {
+  display: block;
+  margin-bottom: 0.625rem;
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 0.9375rem;
+}
+
+.vehicle-form__input,
+.vehicle-form__select {
+  width: 100%;
+  padding: 0.75rem 0.875rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  background-color: #ffffff;
+  transition: all 200ms ease;
+}
+
+.vehicle-form__input::placeholder,
+.vehicle-form__select::placeholder {
+  color: #9ca3af;
+}
+
+.vehicle-form__input:focus,
+.vehicle-form__select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1), 0 0 0 1px #2563eb;
+  background-color: #f8fafc;
+}
+
+.vehicle-form__input:invalid {
+  border-color: #b91c1c;
+}
+
+.vehicle-form__input:invalid:focus {
+  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.1), 0 0 0 1px #b91c1c;
+}
+
+/* Checkbox styling */
+.vehicle-form__input[type="checkbox"] {
+  width: auto;
+  padding: 0;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.vehicle-form__button {
+  display: block;
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background-color: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.vehicle-form__button:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.vehicle-form__button:active {
+  transform: translateY(0px);
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.vehicle-form__button:disabled {
+  background-color: #d1d5db;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.vehicle-form__error {
+  color: #b91c1c;
+  font-size: 0.875rem;
+  margin-top: 0.375rem;
+  display: block;
+}
+
+.vehicle-form__success {
+  color: #15803d;
+  font-size: 0.875rem;
+  margin-top: 0.375rem;
+  display: block;
+}
+
