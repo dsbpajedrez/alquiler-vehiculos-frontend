@@ -1,0 +1,15 @@
+node_modules
+npm-debug.log
+build
+dist
+.git
+.gitignore
+.github
+.env
+.env.local
+.DS_Store
+*.md
+.eslintrc.json
+.vscode
+.idea
+.tool-versions
