@@ -7,7 +7,7 @@ export default function Operations() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const loadOperations = useCallback(async () => {
+    const loadOperations = async () => {
         try {
             setLoading(true);
             const data = await getOperations();
@@ -18,11 +18,11 @@ export default function Operations() {
         } finally {
             setLoading(false);
         }
-    }, []);
+    }
 
     useEffect(() => {
         loadOperations()
-    }, [loadOperations])
+    }, [])
 
     const handleCancel = async (operationId) => {
         try {
