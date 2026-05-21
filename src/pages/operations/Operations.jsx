@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { cancelRent, getOperations } from "../services/operations.service";
+import { cancelRent, getOperations } from "../../services/operations.service";
 import "./Operations.css";
 
 export default function Operations() {

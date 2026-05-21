@@ -10,8 +10,8 @@ import {
 
 import {
   getVehicleById
-} from "../services/vehicle.service";
-import { cancelRent, registerOperation } from "../services/operations.service";
+} from "../../services/vehicle.service";
+import { cancelRent, registerOperation } from "../../services/operations.service";
 import "./VehicleDetail.css";
 
 export default function VehicleDetail() {

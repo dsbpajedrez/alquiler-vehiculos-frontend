@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "../pages/Home";
-import Vehicle from "../pages/Vehicle";
-import Admin from "../pages/Admin";
-import VehicleDetail from "../pages/VehicleDetail";
-import Operations from "../pages/Operations";
+import Home from "../pages/home/Home";
+import Vehicle from "../pages/vehicles/Vehicle";
+import Admin from "../pages/admin/Admin";
+import VehicleDetail from "../pages/vehicleDetail/VehicleDetail";
+import Operations from "../pages/operations/Operations";
 import MainLayout from "../layouts/MainLayout";
 
 export default function AppRoter() {
